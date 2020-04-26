@@ -1,0 +1,14 @@
+# es
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: localhost:9300
+      repositories:
+        enable: true
+
+# rocketmq
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: search-producer-group
