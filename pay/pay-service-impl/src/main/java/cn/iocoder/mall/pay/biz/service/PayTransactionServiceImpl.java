@@ -49,7 +49,7 @@ public class PayTransactionServiceImpl implements PayTransactionService {
     @Autowired
     private PayNotifyTaskMapper payTransactionNotifyTaskMapper;
 
-    @Reference(validation = "true", version = "${dubbo.provider.OrderService.version}")
+    @Reference(validation = "false", check=false, version = "${dubbo.provider.OrderService.version}")
     private OrderService orderService;
 
     @Autowired
