@@ -142,7 +142,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         List<OrderItemDO> orderItemDOList = orderItemMapper
-                .selectByDeletedAndOrderId(DeletedStatusEnum.DELETED_NO.getValue(), orderId);
+                .selectByDeletedAndOrderId(orderId,DeletedStatusEnum.DELETED_NO.getValue());
 
         List<OrderItemBO> orderItemBOList = OrderItemConvert.INSTANCE.convertOrderItemBO(orderItemDOList);
         return CommonResult.success(orderItemBOList);
@@ -617,6 +617,13 @@ public class OrderServiceImpl implements OrderService {
         int updateCount = orderMapper.updateByIdAndStatus(order.getId(), order.getStatus(), updateOrderObj);
         if (updateCount <= 0) {
             return ServiceExceptionUtil.error(OrderErrorCodeEnum.ORDER_STATUS_NOT_WAITING_PAYMENT.getCode()).getMessage();
+        }
+        //更新子单状态
+        List<OrderItemDO> orderItemDOS = orderItemMapper.selectByDeletedAndOrderId(order.getId(), DeletedStatusEnum.DELETED_NO.getValue());
+        for (OrderItemDO itemDO : orderItemDOS) {
+            itemDO.setStatus(OrderStatusEnum.WAIT_SHIPMENT.getValue());
+            itemDO.setPaymentTime(new Date());
+            orderItemMapper.updateById(itemDO);
         }
         // TODO FROM 芋艿 to 小范，把更新 OrderItem 给补全。
         return "success";

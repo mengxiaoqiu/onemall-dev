@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.iocoder.mall.promotion.biz.dao.CouponTemplateMapper">
 
+
     <sql id="FIELDS">
-        id, title, description, type, code_type,
+        id, title, description, `type`, code_type,
         status, quota, total, price_available, range_type,
         range_values, date_type, valid_start_time, valid_end_time, fixed_start_term, fixed_end_term,
-        preferential_type, percent_off, price_off, discount_price_limit, stat_fetch_num,
-        create_time
+        preferential_type, percent_off, price_off, discount_price_limit, stat_fetch_num,create_time
     </sql>
 
 <!--    <select id="selectListByPidAndStatusOrderBySort" resultType="CouponTemplateDO">-->
@@ -50,7 +50,7 @@
         FROM coupon_template
         <where>
             <if test="type != null">
-                AND type = #{type}
+                AND `type` = #{type}
             </if>
             <if test="title != null">
                 AND title LIKE "%"#{title}"%"
@@ -71,7 +71,7 @@
         FROM coupon_template
         <where>
             <if test="type != null">
-                AND type = #{type}
+                AND `type` = #{type}
             </if>
             <if test="title != null">
                 AND title LIKE "%"#{title}"%"
@@ -87,7 +87,7 @@
 
     <insert id="insert" parameterType="CouponTemplateDO" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO coupon_template (
-          title, description, type, code_type,
+          title, description, `type`, code_type,
           status, quota, total, price_available, range_type,
           range_values, date_type, valid_start_time, valid_end_time, fixed_start_term, fixed_end_term,
           preferential_type, percent_off, price_off, discount_price_limit, stat_fetch_num,

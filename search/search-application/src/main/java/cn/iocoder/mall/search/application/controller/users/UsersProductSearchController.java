@@ -30,6 +30,16 @@ public class UsersProductSearchController {
     @Reference(validation = "true", version = "${dubbo.provider.ProductSearchService.version}")
     private ProductSearchService productSearchService;
 
+    /**
+     * 商品分类查询
+     * @param cid
+     * @param keyword
+     * @param pageNo
+     * @param pageSize
+     * @param sortField
+     * @param sortOrder
+     * @return
+     */
     @GetMapping("/page") // TODO 芋艿，后面把 BO 改成 VO
     public CommonResult<ProductPageBO> page(@RequestParam(value = "cid", required = false) Integer cid,
                                             @RequestParam(value = "keyword", required = false) String keyword,
@@ -44,7 +54,24 @@ public class UsersProductSearchController {
             productSearchPageDTO.setSorts(Collections.singletonList(new SortingField(sortField, sortOrder)));
         }
         // 执行搜索
-        return success(productSearchService.getSearchPage(productSearchPageDTO));
+        return success(productSearchService.getProductPage(productSearchPageDTO));
+    }
+
+    @GetMapping("/search") // TODO 芋艿，后面把 BO 改成 VO
+    public CommonResult<ProductPageBO> search(@RequestParam(value = "cid", required = false) Integer cid,
+                                            @RequestParam(value = "keyword", required = false) String keyword,
+                                            @RequestParam(value = "pageNo", required = false) Integer pageNo,
+                                            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+                                            @RequestParam(value = "sortField", required = false) String sortField,
+                                            @RequestParam(value = "sortOrder", required = false) String sortOrder) {
+        // 创建 ProductSearchPageDTO 对象
+        ProductSearchPageDTO productSearchPageDTO = new ProductSearchPageDTO().setCid(cid).setKeyword(keyword)
+                .setPageNo(pageNo).setPageSize(pageSize);
+        if (StringUtil.hasText(sortField) && StringUtil.hasText(sortOrder)) {
+            productSearchPageDTO.setSorts(Collections.singletonList(new SortingField(sortField, sortOrder)));
+        }
+        // 执行搜索
+        return success(productSearchService.getProductSearch(productSearchPageDTO));
     }
 
     @GetMapping("/condition") // TODO 芋艿，后面把 BO 改成 VO

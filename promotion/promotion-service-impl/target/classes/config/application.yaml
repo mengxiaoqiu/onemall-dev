@@ -5,7 +5,7 @@ spring:
     url: jdbc:mysql://localhost:3306/mall_promotion?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
+    password: 303813
     # TODO 芋艿, 后续优化下 druid 参数
     druid:
       initial-size: 5

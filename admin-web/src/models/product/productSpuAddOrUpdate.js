@@ -1,10 +1,6 @@
 import { message } from 'antd';
-import {
-  productSpuAdd,
-  productSpuUpdate,
-  productSpuInfo
-} from '../../services/product';
-import {bool} from "prop-types";
+import { productSpuAdd, productSpuUpdate, productSpuInfo } from '../../services/product';
+import { bool } from 'prop-types';
 
 export default {
   namespace: 'productSpuAddOrUpdate',
@@ -12,11 +8,12 @@ export default {
   state: {
     // list: [],
     loading: false,
-    spu: { // 商品 SPU
-
+    spu: {
+      // 商品 SPU
     },
 
-    attrTree: [ // 商品规格
+    attrTree: [
+      // 商品规格
       // {
       //   id: //
       //   name: //
@@ -26,7 +23,8 @@ export default {
       //   }]
       // }
     ],
-    skus: [ // 商品 SKU
+    skus: [
+      // 商品 SKU
       // {
       //   attrs: [{
       //     id: // 规格值编号
@@ -36,7 +34,6 @@ export default {
       //   quantity: // 数量
       // }
     ],
-
   },
 
   effects: {
@@ -104,10 +101,12 @@ export default {
               attrTreeNode = {
                 id: attr.attrId,
                 name: attr.attrName,
-                values: [{
-                  id: attr.attrValueId,
-                  name: attr.attrValueName,
-                }]
+                values: [
+                  {
+                    id: attr.attrValueId,
+                    name: attr.attrValueName,
+                  },
+                ],
               };
               attrTree.push(attrTreeNode);
             } else {
@@ -206,7 +205,7 @@ export default {
       //   type: 'tree',
       //   payload: {},
       // });
-      alert('添加成功！后续改成跳转到手机站的详情');
+      alert('添加成功！');
     },
     *update({ payload }, { call, put }) {
       const { callback, body } = payload;
@@ -221,28 +220,28 @@ export default {
       //   type: 'tree',
       //   payload: {},
       // });
-      alert('修改成功！后续改成跳转到手机站的详情');
+      alert('修改成功！');
     },
   },
 
   reducers: {
-    addAttrSuccess(state, {payload}) {
+    addAttrSuccess(state, { payload }) {
       // debugger;
       // console.log(state.attrTree);
       state.attrTree.push(payload.attrAdd);
       return {
-        ...state
-      }
+        ...state,
+      };
     },
-    selectAttrSuccess(state, {payload}) {
+    selectAttrSuccess(state, { payload }) {
       // debugger;
       // console.log(state.attrTree);
       state.attrTree[payload.attrIndex] = payload.attr;
       return {
-        ...state
-      }
+        ...state,
+      };
     },
-    selectAttrValueSuccess(state, {payload}) {
+    selectAttrValueSuccess(state, { payload }) {
       // debugger;
       // console.log(state);
       // 设置值。
@@ -258,12 +257,14 @@ export default {
       // 生成 skus 值
       let skus = [];
       let skuSize = 1;
-      for (let i in attrTree) { // 先计算 sku 数量
+      for (let i in attrTree) {
+        // 先计算 sku 数量
         let attr = attrTree[i];
         skuSize = skuSize * attr.values.length;
       }
       // console.log('skuSize: ' + skuSize);
-      for (let i = 0; i < skuSize; i++) { // 初始化 sku 格子
+      for (let i = 0; i < skuSize; i++) {
+        // 初始化 sku 格子
         skus.push({
           attrs: [],
           price: undefined,
@@ -271,7 +272,8 @@ export default {
         });
       }
       // let interval = skuSize; // 该间隔，用于下面规格组合
-      for (let i = 0; i < attrTree.length; i++) { // 初始化 sku 格子里的 attrs
+      for (let i = 0; i < attrTree.length; i++) {
+        // 初始化 sku 格子里的 attrs
         if (i === 1) {
           // debugger;
         }
@@ -296,30 +298,30 @@ export default {
       // debugger;
       // console.l  og('skus: ' + skus);
       return {
-        ...state
-      }
+        ...state,
+      };
     },
-    inputSkuPriceSuccess(state, {payload}) {
+    inputSkuPriceSuccess(state, { payload }) {
       // debugger;
       state.skus[payload.index].price = payload.price;
       return {
-        ...state
-      }
+        ...state,
+      };
     },
-    inputSkuQuantitySuccess(state, {payload}) {
+    inputSkuQuantitySuccess(state, { payload }) {
       // debugger;
       state.skus[payload.index].quantity = payload.quantity;
       return {
-        ...state
-      }
+        ...state,
+      };
     },
-    clear(state, {payload}) {
+    clear(state, { payload }) {
       return {
         ...state,
         skus: [],
         attrTree: [],
         spu: {},
-      }
+      };
     },
     changeLoading(state, { payload }) {
       return {
@@ -333,7 +335,7 @@ export default {
         ...state,
         ...payload,
       };
-    }
+    },
     // treeSuccess(state, { payload }) {
     //   return {
     //     ...state,

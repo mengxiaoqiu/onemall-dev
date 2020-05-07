@@ -90,7 +90,8 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         ProductSpuDetailBO productSpuDetailBO = addProductSpu0(adminId, productSpuAddDTO);
         // 如果新增生成，发送创建商品 Topic 消息
         // TODO 芋艿，先不考虑事务的问题。等后面的 fescar 一起搞
-        sendProductUpdateMessage(productSpuDetailBO.getId());
+        //wuqiong
+//        sendProductUpdateMessage(productSpuDetailBO.getId());
         // 返回成功
         return productSpuDetailBO;
     }
@@ -139,7 +140,7 @@ public class ProductSpuServiceImpl implements ProductSpuService {
         // 更新商品
         updateProductSpu0(adminId, productSpuUpdateDTO);
         // TODO 芋艿，先不考虑事务的问题。等后面的 fescar 一起搞
-        sendProductUpdateMessage(productSpuUpdateDTO.getId());
+//        sendProductUpdateMessage(productSpuUpdateDTO.getId());
     }
 
     @SuppressWarnings("Duplicates")
@@ -246,6 +247,18 @@ public class ProductSpuServiceImpl implements ProductSpuService {
     public List<ProductSpuBO> getProductSpuList(Collection<Integer> ids) {
         List<ProductSpuDO> spus = productSpuMapper.selectByIds(ids);
         return ProductSpuConvert.INSTANCE.convert(spus);
+    }
+
+    @Override
+    public List<ProductSpuBO> getProductSpuByCid(Integer cid) {
+        List<ProductSpuDO> spuDOS = productSpuMapper.selectByCid(cid);
+        return ProductSpuConvert.INSTANCE.convert(spuDOS);
+    }
+
+    @Override
+    public List<ProductSpuBO> getProductSpuByName(String name) {
+        List<ProductSpuDO> spuDOS = productSpuMapper.selectListByNameLikeOrderBySortAsc(name, null, true, null, null, null);
+        return ProductSpuConvert.INSTANCE.convert(spuDOS);
     }
 
     @Override

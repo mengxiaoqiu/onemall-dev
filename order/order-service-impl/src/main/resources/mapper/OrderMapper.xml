@@ -112,16 +112,21 @@
         <if test="hasReturnExchange != null">
             AND `has_return_exchange` = #{hasReturnExchange}
         </if>
+        <if test="true">
+             and deleted = 0
+        </if>
         <if test="startCreateTime != null and endCreateTime != null">
             AND `create_time` &gt;= #{startCreateTime}
             AND `create_time` &lt;= #{endCreateTime}
         </if>
+
     </sql>
 
     <select id="selectPageCount" resultType="java.lang.Integer">
         SELECT
         COUNT(*)
         FROM `orders`
+--         where deleted = 0
         <where>
             <include refid="selectWhere" />
         </where>
@@ -131,6 +136,7 @@
         SELECT
         <include refid="FIELDS" />
         FROM `orders`
+--         where deleted = 0
         <where>
             <include refid="selectWhere" />
         </where>

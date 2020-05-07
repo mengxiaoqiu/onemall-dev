@@ -147,7 +147,7 @@ public class PayTransactionServiceImpl implements PayTransactionService {
     public Boolean updateTransactionPaySuccess(Integer payChannel, String params) {
         // TODO 芋艿，记录回调日志
         // 解析传入的参数，成 TransactionSuccessBO 对象
-        AbstractPaySDK paySDK = PaySDKFactory.getSDK(payChannel);
+        AbstractPaySDK paySDK = PaySDKFactory.getSDK(payChannel );
         CommonResult<TransactionSuccessBO> paySuccessResult = paySDK.parseTransactionSuccessParams(params);
         if (paySuccessResult.isError()) {
             throw ServiceExceptionUtil.exception(paySuccessResult.getCode(), paySuccessResult.getMessage());

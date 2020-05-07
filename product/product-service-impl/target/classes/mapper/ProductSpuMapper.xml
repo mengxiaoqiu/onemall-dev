@@ -16,6 +16,14 @@
 --         AND deleted = 0
     </select>
 
+    <select id="selectByCid" parameterType="Integer" resultType="ProductSpuDO">
+        SELECT
+            <include refid="FIELDS" />
+        FROM product_spu
+        WHERE cid = #{cid}
+        AND deleted = 0
+    </select>
+
     <select id="selectByIds" resultType="ProductSpuDO">
         SELECT
             <include refid="FIELDS" />
@@ -24,7 +32,7 @@
             <foreach item="id" collection="ids" separator="," open="(" close=")" index="">
                 #{id}
             </foreach>
---         AND deleted = 0
+        AND deleted = 0
     </select>
 
     <select id="selectIdListByIdGt" parameterType="Integer" resultType="Integer">
@@ -35,7 +43,7 @@
             <if test="id != null">
                 id > #{id}
             </if>
---             AND deleted = 0
+            AND deleted = 0
         </where>
         ORDER BY id ASC
         LIMIT #{limit}
@@ -110,7 +118,7 @@
             <if test="hasQuantity == false">
                 AND quantity = 0
             </if>
---             AND deleted = 0
+            AND deleted = 0
         </where>
         ORDER BY sort ASC
         <if test="offset != null and limit != null">
@@ -138,7 +146,7 @@
             <if test="hasQuantity == false">
                 AND quantity = 0
             </if>
---             AND deleted = 0
+            AND deleted = 0
         </where>
     </select>
 

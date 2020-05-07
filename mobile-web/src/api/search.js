@@ -2,7 +2,7 @@ import request from "../config/request";
 
 export function getProductPage({cid, keyword, pageNo, pageSize, sortField, sortOrder}) {
   return request({
-    url: '/search-api/users/product/page',
+    url: '/search-api/users/product/search',
     method: 'get',
     params: {
       cid,

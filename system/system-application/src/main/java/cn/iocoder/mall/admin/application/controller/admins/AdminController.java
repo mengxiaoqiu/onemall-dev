@@ -68,7 +68,7 @@ public class AdminController {
                 .filter(node -> !node.getPid().equals(ResourceConstants.PID_ROOT))
                 .forEach((childNode) -> {
                     // 获得父节点
-                    AdminMenuTreeNodeVO parentNode = treeNodeMap.get(childNode.getPid());
+                    AdminMenuTreeNodeVO parentNode =    treeNodeMap.get(childNode.getPid());
                     if (parentNode.getChildren() == null) { // 初始化 children 数组
                         parentNode.setChildren(new ArrayList<>());
                     }

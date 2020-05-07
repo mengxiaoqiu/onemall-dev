@@ -43,11 +43,12 @@ public class UsersProductSpuController {
     })
     @Deprecated // 使用商品搜索接口
     public CommonResult<UsersProductSpuPageVO> page(@RequestParam(value = "cid", required = false) Integer cid,
+                                                    @RequestParam(value = "keyword", required = false) String keyword,
                                                     @RequestParam(value = "pageNo", defaultValue = "0") Integer pageNo,
                                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         // 创建 ProductSpuPageDTO 对象
         ProductSpuPageDTO productSpuPageDTO = new ProductSpuPageDTO().setCid(cid).setVisible(true)
-                .setPageNo(pageNo).setPageSize(pageSize);
+                .setPageNo(pageNo).setPageSize(pageSize).setName(keyword);
         // 查询分页
         ProductSpuPageBO result = productSpuService.getProductSpuPage(productSpuPageDTO);
         // 返回结果

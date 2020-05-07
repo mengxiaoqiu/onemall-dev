@@ -22,13 +22,18 @@ public interface ProductSpuService {
      */
     List<ProductSpuDetailBO> getProductSpuDetailListForSync(Integer lastId, Integer limit);
 
-    ProductSpuPageBO getProductSpuPage(ProductSpuPageDTO productSpuPageDTO);
+    ProductSpuPageBO  getProductSpuPage(ProductSpuPageDTO productSpuPageDTO);
 
     List<ProductSpuBO> getProductSpuSearchList(ProductSpuSearchListDTO productSpuSearchListDTO);
 
     List<ProductSpuBO> getProductSpuList(Collection<Integer> ids);
 
+    List<ProductSpuBO> getProductSpuByCid(Integer cid);
+
+    List<ProductSpuBO> getProductSpuByName(String name);
+
     ProductSkuBO getProductSku(Integer id);
+
 
     List<ProductSkuDetailBO> getProductSkuDetailList(Collection<Integer> ids);
 

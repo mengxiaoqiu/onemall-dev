@@ -78,7 +78,7 @@ public interface OrderItemMapper {
      * @return
      */
     List<OrderItemDO> selectByDeletedAndOrderId(
-            @Param("deleted") Integer deleted,
-            @Param("orderId") Integer orderId
+            @Param("orderId") Integer orderId,
+            @Param("deleted") Integer deleted
     );
 }

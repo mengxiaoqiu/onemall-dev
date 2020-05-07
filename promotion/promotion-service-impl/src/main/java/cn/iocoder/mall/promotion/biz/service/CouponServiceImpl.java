@@ -74,7 +74,7 @@ public class CouponServiceImpl implements CouponService {
                 .setType(CouponTemplateTypeEnum.CARD.getValue())
                 .setStatus(CouponTemplateStatusEnum.ENABLE.getValue())
                 .setStatFetchNum(0);
-        template.setCreateTime(new Date());
+//        template.setCreateTime(new Date());
         couponTemplateMapper.insert(template);
         // 返回成功
         return CouponTemplateConvert.INSTANCE.convert(template);

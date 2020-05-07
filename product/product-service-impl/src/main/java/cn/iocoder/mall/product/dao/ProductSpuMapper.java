@@ -14,6 +14,7 @@ public interface ProductSpuMapper {
 
     List<ProductSpuDO> selectByIds(@Param("ids") Collection<Integer> ids);
 
+    List<ProductSpuDO> selectByCid(Integer cid);
     /**
      * 获得大于 id 的商品编号数组
      *

@@ -8,8 +8,10 @@ import cn.iocoder.mall.order.api.bo.CalcSkuPriceBO;
 import cn.iocoder.mall.product.api.ProductCategoryService;
 import cn.iocoder.mall.product.api.ProductSpuService;
 import cn.iocoder.mall.product.api.bo.ProductCategoryBO;
+import cn.iocoder.mall.product.api.bo.ProductSpuBO;
 import cn.iocoder.mall.product.api.bo.ProductSpuDetailBO;
 import cn.iocoder.mall.search.api.ProductSearchService;
+import cn.iocoder.mall.search.api.bo.ProductBO;
 import cn.iocoder.mall.search.api.bo.ProductConditionBO;
 import cn.iocoder.mall.search.api.bo.ProductPageBO;
 import cn.iocoder.mall.search.api.dto.ProductConditionDTO;
@@ -22,6 +24,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -106,6 +109,36 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         return new ProductPageBO()
                 .setList(ProductSearchConvert.INSTANCE.convert(searchPage.getContent()))
                 .setTotal((int) searchPage.getTotalElements());
+    }
+
+    @Override
+    public ProductPageBO getProductPage(ProductSearchPageDTO searchPageDTO) {
+        List<ProductSpuBO> spuBOS = productSpuService.getProductSpuByCid(searchPageDTO.getCid());
+        List<ProductBO> productBOS = new ArrayList<>();
+        for (ProductSpuBO spuBO : spuBOS) {
+            ProductBO productBO = new ProductBO();
+            BeanUtils.copyProperties(spuBO, productBO);
+            productBO.setOriginalPrice(spuBO.getPrice());
+            productBOS.add(productBO);
+        }
+        return new ProductPageBO()
+                .setList(productBOS)
+                .setTotal( productBOS.size());
+    }
+
+    @Override
+    public ProductPageBO getProductSearch(ProductSearchPageDTO searchPageDTO) {
+        List<ProductSpuBO> spuBOS = productSpuService.getProductSpuByName(searchPageDTO.getKeyword());
+        List<ProductBO> productBOS = new ArrayList<>();
+        for (ProductSpuBO spuBO : spuBOS) {
+            ProductBO productBO = new ProductBO();
+            BeanUtils.copyProperties(spuBO, productBO);
+            productBO.setOriginalPrice(spuBO.getPrice());
+            productBOS.add(productBO);
+        }
+        return new ProductPageBO()
+                .setList(productBOS)
+                .setTotal( productBOS.size());
     }
 
     private void checkSortFieldInvalid(List<SortingField> sorts) {

@@ -44,7 +44,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:13306/mall_product?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai # 请修改成你本地的 MySQL url
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root # 请修改成你本地的 MySQL username
-    password: root # 请修改成你本地的 MySQL password
+    password: 303813 # 请修改成你本地的 MySQL password
 ```
 
 # 4. Zookeeper

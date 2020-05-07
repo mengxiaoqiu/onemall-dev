@@ -19,7 +19,8 @@ const { TabPane } = Tabs;
 
 const OrderContent = props => {
   const { dispatch, item } = props;
-  const { createTime, status, payAmount, id } = item;
+  const { status, payAmount, id } = item;
+  const { createTime } = item.orderItems[0];
   const { name, mobile } = item.orderRecipient || {};
 
   const handleUpdatePayAmount = updateOrderItem => {

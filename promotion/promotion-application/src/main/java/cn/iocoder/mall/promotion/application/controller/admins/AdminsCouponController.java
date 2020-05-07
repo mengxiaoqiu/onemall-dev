@@ -88,7 +88,7 @@ public class AdminsCouponController {
                                                     @RequestParam(value = "validStartTime", required = false) Date validStartTime,
                                                                 @DateTimeFormat(pattern = "yyyy-MM-dd")
                                                     @RequestParam(value = "validEndTime", required = false) Date validEndTime,
-                                                                @RequestParam(value = "fixedBeginTerm", required = false) Integer fixedBeginTerm,
+                                                                @RequestParam(value = "fixedStartTerm", required = false) Integer fixedBeginTerm,
                                                                 @RequestParam(value = "fixedEndTerm", required = false) Integer fixedEndTerm,
                                                                 @RequestParam(value = "preferentialType") Integer preferentialType,
                                                                 @RequestParam(value = "priceOff", required = false) Integer priceOff,

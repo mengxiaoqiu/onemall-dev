@@ -19,6 +19,10 @@ public interface ProductSearchService {
 
     ProductPageBO getSearchPage(ProductSearchPageDTO searchPageDTO);
 
+    ProductPageBO getProductPage(ProductSearchPageDTO searchPageDTO);
+
+    ProductPageBO getProductSearch(ProductSearchPageDTO searchPageDTO);
+
     ProductConditionBO getSearchCondition(ProductConditionDTO conditionDTO);
 
 }
